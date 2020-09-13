@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace Dominio
 {
-    class Program
+    class Cooperativo : Proyecto
     {
-        static void Main(string[] args)
-        {
-        }
+        public int Integrantes { get; set; }
     }
 }
