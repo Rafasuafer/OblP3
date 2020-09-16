@@ -362,3 +362,8 @@ MigrationBackup/
 FodyWeavers.xsd
 
 *.cache
+OblP3/Repositorios/obj/Debug/build.force
+OblP3/Repositorios/obj/Debug/build.force
+OblP3/Repositorios/obj/Debug/Repositorios.csprojAssemblyReference.cache
+OblP3/WebAppObl/obj/Debug/WebAppObl.csprojAssemblyReference.cache
+OblP3/.vs/OblP3/v16/.suo
