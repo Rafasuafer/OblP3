@@ -1,0 +1,6 @@
+C:\Users\ana\Documents\ORT eli\P3\obligatorio 1\OblP3\OblP3\Repositorios\bin\Debug\Repositorios.dll
+C:\Users\ana\Documents\ORT eli\P3\obligatorio 1\OblP3\OblP3\Repositorios\bin\Debug\Repositorios.pdb
+C:\Users\ana\Documents\ORT eli\P3\obligatorio 1\OblP3\OblP3\Repositorios\obj\Debug\Repositorios.csprojAssemblyReference.cache
+C:\Users\ana\Documents\ORT eli\P3\obligatorio 1\OblP3\OblP3\Repositorios\obj\Debug\Repositorios.csproj.CoreCompileInputs.cache
+C:\Users\ana\Documents\ORT eli\P3\obligatorio 1\OblP3\OblP3\Repositorios\obj\Debug\Repositorios.dll
+C:\Users\ana\Documents\ORT eli\P3\obligatorio 1\OblP3\OblP3\Repositorios\obj\Debug\Repositorios.pdb
