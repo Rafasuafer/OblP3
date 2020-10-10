@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Dominio
 {
-    class Resolucion
+    public class Resolucion
     {
         public DateTime FechaResolucion { get; set; }
         public string Estado { get; set; }

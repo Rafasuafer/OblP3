@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Dominio
 {
-    class Cooperativo : Proyecto
+    public class Cooperativo : Proyecto
     {
         public int Integrantes { get; set; }
     }

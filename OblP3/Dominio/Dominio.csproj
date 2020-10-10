@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="Cliente.cs" />
     <Compile Include="Cooperativo.cs" />
+    <Compile Include="IProyecto.cs" />
     <Compile Include="Personal.cs" />
     <Compile Include="Proyecto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -53,12 +54,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Repositorios\Repositorios.csproj">
-      <Project>{659a9b96-6bd6-4f12-842b-2ea06fd9f9db}</Project>
-      <Name>Repositorios</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
