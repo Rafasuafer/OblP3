@@ -8,16 +8,48 @@ namespace Dominio
 {
     public class Proyecto
     {
-        public int Id { get; }
-        public string Titulo { get; set; }
-        public string Descripcion { get; set; }
-        public decimal MontoSolicitado { get; set; }
-        public int CantidadCuotas { get; set; }
-        public DateTime Fecha { get; set; }
-        public Resolucion Resolucion { get; set; }
-        public Usuario Usuario { get; }
+        private int id { get; }
+        private string titulo { get; set; }
+        private string descripcion { get; set; }
+        private decimal montoSolicitado { get; set; }
+        private int cantidadCuotas { get; set; }
+        private DateTime fecha { get; set; }
+        private Resolucion resolucion { get; set; }
+        private Usuario usuario { get; }
 
-        
+
+        public int Id
+        {
+            get { return id; }
+        }
+        public string Titulo
+        {
+            get { return titulo; }
+            set { titulo = value; }
+        }
+        public string Descripcion
+        {
+            get { return descripcion; }
+            set { descripcion = value; }
+        }
+
+        public decimal MontoSolicitado
+        {
+            get { return montoSolicitado; }
+            set { montoSolicitado = value; }
+        }
+        public int CantidadCuotas
+        {
+            get { return cantidadCuotas; }
+            set { cantidadCuotas = value; }
+        }
+        public DateTime Fecha
+        {
+            get { return fecha; }
+            set { fecha = value; }
+        }
+
+
         public void PresentarProyecto(Proyecto unP)
         {
 

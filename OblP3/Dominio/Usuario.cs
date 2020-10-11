@@ -13,7 +13,7 @@ namespace Dominio
         public string Password { get; set; }
 
 
-        public Usuario getUsuarioByCi(int ci) //TERMINAR
+        public static Usuario getUsuarioByCi(int ci) //TERMINAR
         {
             Usuario unU = null;
             return unU;

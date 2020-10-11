@@ -1,0 +1,43 @@
+﻿@model Dominio.Cooperativo
+
+@{
+    ViewBag.Title = "AltaCooperativo";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+</head>
+<body>
+
+    <h2>Alta Proyecto Cooperativo</h2>
+
+    @if (@ViewBag.mensaje != null)
+    {
+        <div class="alert alert-danger">
+            @ViewBag.mensaje
+        </div>
+    }
+
+    <form action="/Proyecto/AltaCooperativo" method="post">
+        <label>Titulo del proyecto</label> <br />
+        <input id="titulo" type="text" name="titulo" value="@Model.Titulo" required />  <br />
+        <label>Descripcion</label><br />
+        <input id="descripcion" type="text" name="descripcion" value="@Model.Descripcion" required />  <br />
+        <label>Monto solicitado</label><br />
+        <input id="montoSolicitado" type="number" name="montoSolicitado" value="@Model.MontoSolicitado" required />  <br />
+        <label>Cantidad de cuotas</label><br />
+        <input id="cantidadCuotas" type="number" name="cantidadCuotas" value="@Model.CantidadCuotas" required />  <br />
+        <label>Cantidad de integrantes</label><br />
+        <input id="integrantes" type="number" name="integrantes" value="@Model.Ingtegrantes" required />  <br />
+        <label>Fecha de la solicitud</label><br />
+        <input id="fecha" type="date" name="fecha" value="@Model.Fecha" required />  <br />
+        <button type="submit">Alta de solicitud</button><br />
+
+    </form>
+
+
+</body>
+</html>
