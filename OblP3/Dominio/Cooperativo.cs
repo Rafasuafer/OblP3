@@ -12,7 +12,7 @@ namespace Dominio
 
 
 
-        public int Ingtegrantes
+        public int Integrantes
         {
             get { return integrantes; }
             set { integrantes = value; }
@@ -22,23 +22,31 @@ namespace Dominio
         {
             string msg = "";
 
-
-            if (Validar(unP) == "ok")
+            if (getPCByCi(unP.Usuario.Ci) && getPPByCi(unP.Usuario.Ci))
             {
-                /*unP.Id = GestorId.GenDonId;
-                nDonacion.Voluntario = vol;
-                donaciones.Add(nDonacion);*/
-                msg += "ok";
+                if (Validar(unP) == "ok")
+                {
+                    unP.Usuario = unU;
+                    unP.Tasa = getTasaByCuota(unP.CantidadCuotas);
+                    MisProyectos.Add(unP);
+                    msg += "ok";
+                }
+                else
+                {
+                    msg += Validar(unP);
+                }
+
             }
             else
             {
-                msg += Validar(unP);
+                msg += "Ya existe un proyecto pendiente de aprobacion";
             }
+
 
 
             return msg;
         }
-        public string Validar(Cooperativo unP)
+        public static string Validar(Cooperativo unP)
 
         {
 
@@ -60,7 +68,7 @@ namespace Dominio
             {
                 validacion += "Cantidad de cuotas invalida |";
             }
-            if (unP.Ingtegrantes < 2 )
+            if (unP.Integrantes < 2 )
             {
                 validacion += "Deben ser al menos 2 integrantes |";
             }
@@ -70,5 +78,38 @@ namespace Dominio
             }
             return validacion;
         }
+        public override decimal CalcularMontoProyecto(Proyecto unP)
+        {
+
+            int cantidadCuotas = unP.CantidadCuotas;
+            int tasa = getTasaByCuota(unP.CantidadCuotas);
+
+            decimal monto = 0;
+            Cooperativo c = (Cooperativo)unP;
+            decimal montoMaximo = getMaxMonto();
+            decimal cantidadIntegrantes = Decimal.ToInt32(c.Integrantes);
+            if (monto >= montoMaximo)
+            {
+                if (cantidadIntegrantes >= 10)
+                {
+                    monto = montoMaximo + (montoMaximo * 20) / 100;
+
+                }
+                else
+                {
+                    monto = unP.MontoSolicitado + ((cantidadIntegrantes * 2) * 100) / montoMaximo;
+
+                }
+
+            }
+            else
+            {
+
+                monto = unP.MontoSolicitado;
+            }
+            return monto;
+
+        }
+
     }
 }

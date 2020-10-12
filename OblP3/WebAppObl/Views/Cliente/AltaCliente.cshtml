@@ -1,0 +1,44 @@
+﻿@model Dominio.Cliente
+
+@{
+    ViewBag.Title = "AltaCliente";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+</head>
+<body>
+
+    <h2>Alta Cliente</h2>
+
+    @if (@ViewBag.mensaje != null)
+    {
+        <div class="alert alert-danger">
+            @ViewBag.mensaje
+        </div>
+    }
+
+        <form action="/Cliente/AltaCliente" method="post">
+            <label>Nombre completo</label> <br />
+            <input id="nombre" type="text" name="nombre" value="@Model.Nombre" required />  <br />
+            <label>Documento de identidad</label><br />
+            <input id="ci" type="number" name="ci" value="@Model.Ci" required />  <br />
+            <label>Correo electronico</label><br />
+            <input id="email" type="email" name="email" value="@Model.Email" required />  <br />
+            <label>Celular</label><br />
+            <input id="celular" type="number" name="celular" value="@Model.Celular" required />  <br />
+            <input id="rol" type="text" name="rol" value="cliente" />  <br />
+            <label>Contraseña</label><br />
+            <input id="password" type="password" name="password" value="@Model.Password" required />  <br />
+            <label>Fecha de nacimiento</label><br />
+            <input id="fecha" type="date" name="fecha" value="@Model.FechaNacimiento" required />  <br />
+            <button type="submit">Alta de cliente</button><br />
+
+        </form>
+
+
+</body>
+</html>

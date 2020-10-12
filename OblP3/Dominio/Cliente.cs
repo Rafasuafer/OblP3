@@ -10,23 +10,37 @@ namespace Dominio
     {
         public string Nombre { get; set; }
         public string Email { get; set; }
+        public int Celular { get; set; }
         public DateTime FechaNacimiento { get; }
-        public ICollection<Cliente> MisClientes { get; set; }
 
+        public ICollection<Cliente> MisClientes { get; private set; }
+            = new List<Cliente>();
 
-        public bool AgregarCliente(Cliente unC)
+        public static bool AgregarCliente(Cliente unC)
         {
             if (unC == null
-                || !unC.Validar()
-                || MisClientes.Contains(unC))
+                || !Validar(unC)
+                || MisUsuarios.Contains(unC))
                 return false;
-            MisClientes.Add(unC);
+            MisUsuarios.Add(unC);
             return true;
         }
-        public bool Validar()
+        public static bool Validar(Cliente unC)
         {
-
-            return true;
+            bool esValido = false;
+            if(unC.Nombre.ToString().Length > 3 && unC.Ci == 8 
+                && unC.Email.ToString().Length >= 6 
+                && unC.Password.ToString().Length >= 8 
+                && (DateTime.Now.Year - unC.FechaNacimiento.Year) >= 21 
+                && unC.Celular == 9)
+            {
+                esValido = true;
+            }
+            else
+            {
+                esValido = false;
+            }
+            return esValido;
         }
         
     }

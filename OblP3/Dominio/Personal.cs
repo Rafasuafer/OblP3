@@ -19,23 +19,30 @@ namespace Dominio
         {
             string msg = "";
 
-
-            if (Validar(unP) == "ok")
+            if(getPCByCi(unP.Usuario.Ci) && getPPByCi(unP.Usuario.Ci))
             {
-                /*unP.Id = GestorId.GenDonId;
-                nDonacion.Voluntario = vol;
-                donaciones.Add(nDonacion);*/
-                msg += "ok";
+                if (Validar(unP) == "ok")
+                {
+                    unP.Usuario = unU;
+                    unP.Tasa = getTasaByCuota(unP.CantidadCuotas);
+                    MisProyectos.Add(unP);
+                    msg += "ok";
+                }
+                else
+                {
+                    msg += Validar(unP);
+                }
             }
             else
             {
-                msg += Validar(unP);
+                msg += "Ya existe un proyecto pendiente de aprobacion";
             }
+           
 
 
             return msg;
         }
-        public string Validar(Personal unP) 
+        public static string Validar(Personal unP) 
 
         {
 
@@ -66,6 +73,29 @@ namespace Dominio
                 validacion = "ok";
             }
             return validacion;
+        }
+
+        public override decimal CalcularMontoProyecto(Proyecto unP)
+        {
+
+            int cantidadCuotas = unP.CantidadCuotas;
+            int tasa = getTasaByCuota(unP.CantidadCuotas);
+
+            decimal monto = 0;
+            decimal montoMaximo = getMaxMonto();
+
+            if (monto >= montoMaximo)
+            {
+
+                monto = montoMaximo - (montoMaximo * 20) / 1000;
+
+            }
+            else
+            {
+                monto = unP.MontoSolicitado;
+
+            }
+            return monto;
         }
 
     }

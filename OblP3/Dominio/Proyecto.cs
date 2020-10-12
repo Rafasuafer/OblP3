@@ -8,19 +8,23 @@ namespace Dominio
 {
     public class Proyecto
     {
-        private int id { get; }
-        private string titulo { get; set; }
-        private string descripcion { get; set; }
-        private decimal montoSolicitado { get; set; }
-        private int cantidadCuotas { get; set; }
-        private DateTime fecha { get; set; }
-        private Resolucion resolucion { get; set; }
-        private Usuario usuario { get; }
+        private int id;
+        private string titulo;
+        private string descripcion;
+        private decimal montoSolicitado;
+        private int cantidadCuotas;
+        private DateTime fecha;
+        private Resolucion resolucion;
+        private Usuario usuario;
+        private int tasa;
 
+        public static ICollection<Proyecto> MisProyectos { get; private set; }
+            = new List<Proyecto>();
 
         public int Id
         {
             get { return id; }
+            set { id = value; }
         }
         public string Titulo
         {
@@ -48,57 +52,36 @@ namespace Dominio
             get { return fecha; }
             set { fecha = value; }
         }
-
-
-        public void PresentarProyecto(Proyecto unP)
+        public Usuario Usuario
         {
-
-            if (ValidarPendiente(unP) == "ok")
-            {
-                if (ValidarRequisitos(unP) == "ok"){
-                    decimal monto = calcularMonto(unP);
-                }
-            }
-           
+            get { return usuario; }
+            set { usuario = value; }
         }
-        public string ValidarPendiente(Proyecto unP)
+        public int Tasa
         {
-            string msg = "ok";
-            int i = 0;
-            bool existe = false;
-            while (i > Repositorios.RepositorioProyecto.Proyectos && !existe)
-            {
-                if (unP.Usuario.Ci == Session["ci"])
-                {
-                    existe = true;
-                    bool pendiente = false;
-                    if (unP.Resolucion.Estado == "pendiente" && !pendiente)
-                    {
-                        pendiente = true;
-                        msg = "#Ya cuenta con un proyecto pendiente de aceptacion";
-                    }
-
-                }
-                i++;
-            }
-
-            return msg;
+            get { return tasa; }
+            set { tasa = value; }
         }
-        public string ValidarRequisitos(Proyecto unP)
-        {
-            string msg = "ok";
-            return msg;
-        }
-        public decimal calcularMonto(Proyecto unP)
-        {
 
-
-        }
+        
         public bool Validar()
         {
             return Id > 0 &&
                 !string.IsNullOrEmpty(Titulo)
                 && !string.IsNullOrEmpty(Descripcion);
+        }
+        public virtual decimal CalcularMontoProyecto(Proyecto unP)
+        {
+
+            decimal monto = 0;
+
+            return monto;
+        }
+        public decimal MontoPorCuota(Proyecto unP)
+        {
+            decimal monto = CalcularMontoProyecto(unP);
+            decimal montoPorCuota = monto / unP.CantidadCuotas;
+            return montoPorCuota;
         }
     }
     
