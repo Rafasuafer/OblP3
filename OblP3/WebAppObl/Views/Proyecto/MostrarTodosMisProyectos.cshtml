@@ -1,0 +1,89 @@
+﻿@using Dominio
+@{
+    ViewBag.Title = "MostrarTodosMisProyectos";
+}
+
+<h2>Todos los proyectos</h2>
+
+<table class="table">
+    <thead class="thead-dark">
+
+
+        @if (ViewBag.Cop != null)
+        {
+            <tr>
+                <th scope="col">Fecha</th>
+                <th scope="col">Titulo</th>
+                <th scope="col">Cantidad de cuotas  </th>
+                <th scope="col">Monto por cuota</th>
+                <th scope="col">Monto solicitado</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Imagen</th>
+
+
+
+
+            </tr>
+        </thead>
+
+        foreach (Cooperativo unC in @ViewBag.Cop)
+        {
+            <tbody>
+                <tr>
+                    <th scope="row">@unC.Fecha</th>
+                    <th scope="row">@unC.Titulo</th>
+                    <th scope="row">@unC.CantidadCuotas</th>
+                    <th scope="row">@unC.MontoPorCuota(unC)</th>
+                    <th scope="row">@unC.MontoSolicitado</th>
+                    <th scope="row">@unC.Resolucion.Estado</th>
+                    @*<th scope="row">@unC.Imagen</th>*@
+
+
+
+                </tr>
+
+            </tbody>
+
+        }
+    }
+        @if (ViewBag.Per != null)
+        {
+            <tr>
+                <th scope="col">Fecha</th>
+                <th scope="col">Titulo</th>
+                <th scope="col">Cantidad de cuotas  </th>
+                <th scope="col">Monto por cuota</th>
+                <th scope="col">Monto solicitado</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Imagen</th>
+
+
+
+
+            </tr>
+
+            foreach (Cooperativo unP in @ViewBag.Per)
+            {
+                <tbody>
+                    <tr>
+                        <th scope="row">@unP.Fecha</th>
+                        <th scope="row">@unP.Titulo</th>
+                        <th scope="row">@unP.CantidadCuotas</th>
+                        <th scope="row">@unP.MontoPorCuota(unP)</th>
+                        <th scope="row">@unP.MontoSolicitado</th>
+                        <th scope="row">@unP.Resolucion.Estado</th>
+                        @*<th scope="row">@unP.Imagen</th>*@
+
+
+
+                    </tr>
+
+                </tbody>
+
+            }
+        }
+
+
+
+
+    </table>

@@ -1,5 +1,6 @@
 ﻿@model Dominio.Cooperativo
 
+
 @{
     ViewBag.Title = "AltaCooperativo";
 }
@@ -20,8 +21,7 @@
             @ViewBag.mensaje
         </div>
     }
-
-    <form action="/Proyecto/AltaCooperativo" method="post">
+    <form action="/Proyecto/AltaCooperativo" method="post" enctype="multipart/form-data">
         <label>Titulo del proyecto</label> <br />
         <input id="titulo" type="text" name="titulo" value="@Model.Titulo" required />  <br />
         <label>Descripcion</label><br />
@@ -31,12 +31,14 @@
         <label>Cantidad de cuotas</label><br />
         <input id="cantidadCuotas" type="number" name="cantidadCuotas" value="@Model.CantidadCuotas" required />  <br />
         <label>Cantidad de integrantes</label><br />
-        <input id="integrantes" type="number" name="integrantes" value="@Model.Ingtegrantes" required />  <br />
+        <input id="integrantes" type="number" name="integrantes" value="@Model.Integrantes" required />  <br />
         <label>Fecha de la solicitud</label><br />
         <input id="fecha" type="date" name="fecha" value="@Model.Fecha" required />  <br />
-        <button type="submit">Alta de solicitud</button><br />
+        <input type="image" name="Archivo" value="@Model.Archivo" />
+        <button type="submit">Verficar</button><br />
 
     </form>
+
 
 
 </body>

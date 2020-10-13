@@ -17,10 +17,35 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
+                    @if (Session["rol"] == null)
+                    {
+                        <li><a href="/Home/Login">Iniciar Sesion</a> </li>
+                        @Html.ActionLink("Registrarse", "AltaCliente", "Cliente", new { area = "" }, new { @class = "navbar-brand" })
+
+
+                    }
+                    @if (Session["rol"] != null && Session["rol"].ToString() == "admin")
+                    {
+                        // @Html.ActionLink("Productos", "Index", "Producto", new { area = "" }, new { @class = "navbar-brand" })
+                        // @Html.ActionLink("Voluntarios", "Index", "Voluntario", new { area = "" }, new { @class = "navbar-brand" })
+                        <li><a href="/usuario/logout">Salir</a> </li>
+
+
+                    }
+
+                    @if (Session["rol"] != null && Session["rol"].ToString() == "usuario")
+                    {
+                        @Html.ActionLink("Proyectos", "Index", "Proyecto", new { area = "" }, new { @class = "navbar-brand" })
+                        @Html.ActionLink("Donaciones", "index", "donacionProd", new { area = "" }, new { @class = "navbar-brand" })
+                        <li><a href="/usuario/logout">Salir</a> </li>
+
+
+                    }
+
+
                 </ul>
             </div>
         </div>

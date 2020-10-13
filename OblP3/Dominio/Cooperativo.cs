@@ -17,23 +17,26 @@ namespace Dominio
             get { return integrantes; }
             set { integrantes = value; }
         }
-
-        public static string AltaCooperativo(Cooperativo unP, Usuario unU)
+        
+        public static string AltaCooperativo(Proyecto unP, Usuario unU, int integrantes)
         {
-            string msg = "";
 
-            if (getPCByCi(unP.Usuario.Ci) && getPPByCi(unP.Usuario.Ci))
+            string msg = "";
+            
+            if (!ExisteProyectoP(unP) && !ExisteProyectoC(unP))
             {
-                if (Validar(unP) == "ok")
+                if (Proyecto.Validar(unP) == "ok")
                 {
-                    unP.Usuario = unU;
-                    unP.Tasa = getTasaByCuota(unP.CantidadCuotas);
-                    MisProyectos.Add(unP);
+                    Cooperativo c = (Cooperativo)unP;
+                    c.Usuario = unU;
+                    c.Tasa = getTasaByCuota(unP.CantidadCuotas);
+                    c.Integrantes = integrantes;
+                    listaPendiente.Add(c);
                     msg += "ok";
                 }
                 else
                 {
-                    msg += Validar(unP);
+                    msg += Proyecto.Validar(unP);
                 }
 
             }
@@ -46,38 +49,7 @@ namespace Dominio
 
             return msg;
         }
-        public static string Validar(Cooperativo unP)
-
-        {
-
-            string validacion = "#Error/es: ";
-
-            if (unP.Descripcion.Length < 30)
-            {
-                validacion += "La descripcion debe tener al menos 30 caracteres |";
-            }
-            if (unP.Titulo.Length < 1)
-            {
-                validacion += "Debe ingresar titulo |";
-            }
-            if (unP.MontoSolicitado < 2000)
-            {
-                validacion += "El monto muy bajo |";
-            }
-            if (unP.CantidadCuotas < 10)
-            {
-                validacion += "Cantidad de cuotas invalida |";
-            }
-            if (unP.Integrantes < 2 )
-            {
-                validacion += "Deben ser al menos 2 integrantes |";
-            }
-            if (validacion == "#Error/es: ")
-            {
-                validacion = "ok";
-            }
-            return validacion;
-        }
+       
         public override decimal CalcularMontoProyecto(Proyecto unP)
         {
 

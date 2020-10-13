@@ -15,65 +15,36 @@ namespace Dominio
             get { return explicacion; }
             set { explicacion = value; }
         }
-        public static string AltaPersonal(Personal unP, Usuario unU)
+        public static string AltaPersonal(Proyecto unP, Usuario unU, string explicacion)
         {
+
             string msg = "";
 
-            if(getPCByCi(unP.Usuario.Ci) && getPPByCi(unP.Usuario.Ci))
+            if (!ExisteProyectoP(unP) && !ExisteProyectoC(unP))
             {
-                if (Validar(unP) == "ok")
+                if (Proyecto.Validar(unP) == "ok")
                 {
-                    unP.Usuario = unU;
-                    unP.Tasa = getTasaByCuota(unP.CantidadCuotas);
-                    MisProyectos.Add(unP);
+                    Personal p = (Personal)unP;
+                    p.Usuario = unU;
+                    p.Tasa = getTasaByCuota(unP.CantidadCuotas);
+                    p.Explicacion = explicacion;
+                    listaPendiente.Add(p);
                     msg += "ok";
                 }
                 else
                 {
-                    msg += Validar(unP);
+                    msg += Proyecto.Validar(unP);
                 }
+
             }
             else
             {
                 msg += "Ya existe un proyecto pendiente de aprobacion";
             }
-           
-
 
             return msg;
         }
-        public static string Validar(Personal unP) 
 
-        {
-
-            string validacion = "#Error/es: ";
-
-            if (unP.Descripcion.Length < 30)
-            {
-                validacion += "La descripcion debe tener al menos 30 caracteres |";
-            }
-            if (unP.Titulo.Length < 1)
-            {
-                validacion += "Debe ingresar titulo |";
-            }
-            if (unP.MontoSolicitado < 2000)
-            {
-                validacion += "El monto muy bajo |";
-            }
-            if (unP.CantidadCuotas < 10)
-            {
-                validacion += "Cantidad de cuotas invalida |";
-            }
-            if (unP.Explicacion.Length < 10 )
-            {
-                validacion += "La explicacion debe tener al menos 30 caracteres |";
-            }
-            if (validacion == "#Error/es: ")
-            {
-                validacion = "ok";
-            }
-            return validacion;
-        }
 
         public override decimal CalcularMontoProyecto(Proyecto unP)
         {

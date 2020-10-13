@@ -12,11 +12,11 @@ namespace WebAppObl.Controllers
     public class UsuarioController : Controller
     {
         // GET: Usuario
-        public ActionResult Index()
+        public ActionResult Login()
         {
             return View();
         }
-
+        [HttpPost]
         public ActionResult Login(int ci, string password)
         {
             Usuario usuario = Usuario.getUsuarioByCi(ci);
@@ -28,8 +28,8 @@ namespace WebAppObl.Controllers
             }
 
             Session["rol"] = usuario.Rol;
-            Session["nombre"] = usuario.Nombre;
-            return Redirect("/Producto/Index");
+            Session["ci"] = usuario.Ci;
+            return Redirect("/Proyecto/Index");
         }
 
         public ActionResult Logout()

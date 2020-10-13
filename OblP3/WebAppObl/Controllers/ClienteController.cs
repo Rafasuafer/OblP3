@@ -10,9 +10,9 @@ namespace WebAppObl.Controllers
     public class ClienteController : Controller
     {
         // GET: Cliente
-        public ActionResult Index()
+        public ActionResult Index(string mensaje)
         {
-            return View();
+            return View(mensaje);
         }
 
         [HttpGet]
