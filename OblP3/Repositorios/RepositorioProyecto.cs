@@ -12,41 +12,11 @@ namespace Repositorios
     {
         public List<Proyecto> Proyectos;
 
-        /*public bool Add(Proyecto unP)
-        {
-
-            if (!unP.Validar()) return false;
-            // Conexion unaCon = new Conexion();
-            SqlConnection cn = unaCon.CrearConexion();
-            SqlCommand cmd = new SqlCommand("INSERT INTO Proyecto VALUES (@Titulo, @Descripcion, @MontoSolicitado, @CantidadCuotas)", cn);
-            cmd.Parameters.Add(new SqlParameter("@Titulo", unP.Titulo));
-            cmd.Parameters.Add(new SqlParameter("@Descripcion", unP.Descripcion));
-            cmd.Parameters.Add(new SqlParameter("@MontoSolicitado", unP.MontoSolicitado));
-            cmd.Parameters.Add(new SqlParameter("@CantidadCuotas", unP.CantidadCuotas));
-            try
-            {
-                if (unaCon.AbrirConexion(cn))
-                {
-                    cmd.ExecuteNonQuery();
-                    return true;
-                }
-                return false;
-            }
-            catch (Exception ex)
-            {
-                return false;
-            }
-            finally
-            {
-                unaCon.CerrarConexion(cn);
-            }
-        }*/
-
         public bool Add(Proyecto unP)
         {
             //Tendría todo el código de ADO.NET para hacer el INSERT  a través de comandos.
 
-            if (unP == null || !unP.Validar())
+            if (unP == null || Proyecto.Validar(unP) != "ok")
                 return false;
 
             Conexion unaCon = new Conexion();
@@ -85,19 +55,16 @@ namespace Repositorios
                     {
                         Cooperativo c = (Cooperativo)unP;
                         cmd2.CommandText = "INSERT INTO ProductoNacional VALUES (@Integrantes)";
-                        cmd2.Parameters.Add(new SqlParameter("@Integrantes", c.Ingtegrantes));
+                        cmd2.Parameters.Add(new SqlParameter("@Integrantes", c.Integrantes));
                  
                     }
                     else
                     {
                         return false;
                     }
-                    //Asignarle la transacción al segundo comando
                     cmd2.Transaction = trn;
 
                     cmd2.ExecuteNonQuery();
-                    //Si llegué ácá se pudieron ejecutar todas las operaciones
-                    //xq sino hubiera saltado x el catch, así que hacemos el commit:
                     trn.Commit();
                     return true;
                 }
@@ -152,9 +119,29 @@ namespace Repositorios
             }
         }
 
-        public Proyecto GetTbyId(object clave)
+        public int getTasaByCuota(int cuota)
         {
-            throw new NotImplementedException();
+            Conexion unaCon = new Conexion();
+            SqlConnection cn = unaCon.CrearConexion();
+            int tasa = 0;
+            try
+            {
+                if (cuota > 0)
+                {
+                     tasa = getTasaByCuota(cuota);
+
+                }
+                return tasa;
+            }
+            
+            catch (Exception ex)
+            {
+                return 0;
+            }
+            finally
+            {
+                unaCon.CerrarConexion(cn);
+            }
         }
 
         public bool Remove(Proyecto unT)

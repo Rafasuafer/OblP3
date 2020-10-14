@@ -1,7 +1,52 @@
-﻿@model Dominio.Proyecto
+﻿@using Dominio
 @{
     ViewBag.Title = "ConfirmarEstado";
 }
 
-<h2>ConfirmarEstado</h2>
+<h2>Confirmar Estado</h2>
 
+<h2>Todos los proyectos</h2>
+<label>Ingrese documento</label>
+<input type="number" name="documento" value="" />
+
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Fecha</th>
+            <th scope="col">Titulo</th>
+            <th scope="col">Cantidad de cuotas  </th>
+            <th scope="col">Monto por cuota</th>
+            <th scope="col">Monto solicitado</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Imagen</th>
+
+
+        </tr>
+    </thead>
+    @if (@ViewBag.TodoCop != null)
+    {
+
+
+        foreach (Proyecto unP in @ViewBag.proyecto)
+        {
+            <tbody>
+                <tr>
+                    <th scope="row">@unP.Fecha</th>
+                    <th scope="row">@unP.Titulo</th>
+                    <th scope="row">@unP.CantidadCuotas</th>
+                    <th scope="row">@unP.MontoPorCuota(unP)</th>
+                    <th scope="row">@unP.MontoSolicitado</th>
+                    <th scope="row">@unP.Resolucion.Estado</th>
+                    @*<th scope="row">@unP.Imagen</th>*@
+                    <td><a href="/Proyecto/ConfirmarEstado/@unP.Id"> Evaluar</a></td>
+
+
+
+
+                </tr>
+
+            </tbody>
+
+
+        }
+    }

@@ -9,24 +9,285 @@
 
 <table class="table">
     <thead class="thead-dark">
+        <tr>
+            <th scope="col">Fecha</th>
+            <th scope="col">Titulo</th>
+            <th scope="col">Cantidad de cuotas  </th>
+            <th scope="col">Monto por cuota</th>
+            <th scope="col">Monto solicitado</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Imagen</th>
 
 
-        @if (ViewBag.Cop != null)
+
+
+        </tr>
+    </thead>
+
+    @*//POR CI*@
+
+    @using (Html.BeginForm("MostrarTodosLosProyectos", "Proyectos", FormMethod.Post))
+    {
+        <div>
+            @Html.Label("Buscar por numero de documento")
+            @Html.TextBox("ci", "", new { @Class = "form-control" })
+            <button type="submit">
+                Buscar
+
+            </button>
+        </div>
+        if (@ViewBag.TodoCop != null)
         {
-            <tr>
-                <th scope="col">Fecha</th>
-                <th scope="col">Titulo</th>
-                <th scope="col">Cantidad de cuotas  </th>
-                <th scope="col">Monto por cuota</th>
-                <th scope="col">Monto solicitado</th>
-                <th scope="col">Estado</th>
-                <th scope="col">Imagen</th>
+
+
+            foreach (Cooperativo unC in @ViewBag.TodoCop)
+            {
+                <tbody>
+                    <tr>
+                        <th scope="row">@unC.Fecha</th>
+                        <th scope="row">@unC.Titulo</th>
+                        <th scope="row">@unC.CantidadCuotas</th>
+                        <th scope="row">@unC.MontoPorCuota(unC)</th>
+                        <th scope="row">@unC.MontoSolicitado</th>
+                        <th scope="row">@unC.Resolucion.Estado</th>
+                        @*<th scope="row">@unC.Imagen</th>*@
+                        <td><a href="/Proyecto/ConfirmarEstado/@unC.Id"> Evaluar</a></td>
 
 
 
 
-            </tr>
-        </thead>
+                    </tr>
+
+                </tbody>
+
+            }
+        }
+        if (@ViewBag.TodoPer != null)
+        {
+            foreach (Cooperativo unP in @ViewBag.TodoPer)
+            {
+                <tbody>
+                    <tr>
+                        <th scope="row">@unP.Fecha</th>
+                        <th scope="row">@unP.Titulo</th>
+                        <th scope="row">@unP.CantidadCuotas</th>
+                        <th scope="row">@unP.MontoPorCuota(unP)</th>
+                        <th scope="row">@unP.MontoSolicitado</th>
+                        <th scope="row">@unP.Resolucion.Estado</th>
+                        @*<th scope="row">@unP.Imagen</th>*@
+                        <td><a href="/Proyecto/ConfirmarEstado/@unP.Id"> Evaluar</a></td>
+
+                    </tr>
+
+                </tbody>
+
+            }
+        }
+    }
+    @*//POR FECHA*@
+
+    @using (Html.BeginForm("MostrarTodosLosProyectos", "Proyectos", FormMethod.Post))
+    {
+        <div>
+            @Html.Label("Buscar por fecha de solicitud")
+            <input type="date" name="fecha" />
+            <button type="submit">
+                Buscar
+
+            </button>
+        </div>
+        if (@ViewBag.cFecha != null)
+        {
+
+
+            foreach (Cooperativo unC in @ViewBag.cFecha)
+            {
+                <tbody>
+                    <tr>
+                        <th scope="row">@unC.Fecha</th>
+                        <th scope="row">@unC.Titulo</th>
+                        <th scope="row">@unC.CantidadCuotas</th>
+                        <th scope="row">@unC.MontoPorCuota(unC)</th>
+                        <th scope="row">@unC.MontoSolicitado</th>
+                        <th scope="row">@unC.Resolucion.Estado</th>
+                        @*<th scope="row">@unC.Imagen</th>*@
+                        <td><a href="/Proyecto/ConfirmarEstado/@unC.Id"> Evaluar</a></td>
+
+
+
+
+                    </tr>
+
+                </tbody>
+
+            }
+        }
+        if (@ViewBag.pFecha != null)
+        {
+            foreach (Cooperativo unP in @ViewBag.pFecha)
+            {
+                <tbody>
+                    <tr>
+                        <th scope="row">@unP.Fecha</th>
+                        <th scope="row">@unP.Titulo</th>
+                        <th scope="row">@unP.CantidadCuotas</th>
+                        <th scope="row">@unP.MontoPorCuota(unP)</th>
+                        <th scope="row">@unP.MontoSolicitado</th>
+                        <th scope="row">@unP.Resolucion.Estado</th>
+                        @*<th scope="row">@unP.Imagen</th>*@
+                        <td><a href="/Proyecto/ConfirmarEstado/@unP.Id"> Evaluar</a></td>
+
+                    </tr>
+
+                </tbody>
+
+            }
+        }
+    }
+
+    @*//POR ESTADO*@
+
+
+    @using (Html.BeginForm("MostrarTodosLosProyectos", "Proyectos", FormMethod.Post))
+    {
+        <div>
+            @Html.Label("Buscar por estado (Pendiente / Aprobado / Rechazado)")
+            @Html.TextBox("estado", "", new { @Class = "form-control" })
+            <button type="submit">
+                Buscar
+
+            </button>
+        </div>
+        if (@ViewBag.cEstado != null)
+        {
+
+
+            foreach (Cooperativo unC in @ViewBag.cEstado)
+            {
+                <tbody>
+                    <tr>
+                        <th scope="row">@unC.Fecha</th>
+                        <th scope="row">@unC.Titulo</th>
+                        <th scope="row">@unC.CantidadCuotas</th>
+                        <th scope="row">@unC.MontoPorCuota(unC)</th>
+                        <th scope="row">@unC.MontoSolicitado</th>
+                        <th scope="row">@unC.Resolucion.Estado</th>
+                        @*<th scope="row">@unC.Imagen</th>*@
+                        <td><a href="/Proyecto/ConfirmarEstado/@unC.Id"> Evaluar</a></td>
+
+
+
+
+                    </tr>
+
+                </tbody>
+
+            }
+        }
+        if (@ViewBag.pEstado != null)
+        {
+            foreach (Cooperativo unP in @ViewBag.pEstado)
+            {
+                <tbody>
+                    <tr>
+                        <th scope="row">@unP.Fecha</th>
+                        <th scope="row">@unP.Titulo</th>
+                        <th scope="row">@unP.CantidadCuotas</th>
+                        <th scope="row">@unP.MontoPorCuota(unP)</th>
+                        <th scope="row">@unP.MontoSolicitado</th>
+                        <th scope="row">@unP.Resolucion.Estado</th>
+                        @*<th scope="row">@unP.Imagen</th>*@
+                        <td><a href="/Proyecto/ConfirmarEstado/@unP.Id"> Evaluar</a></td>
+
+                    </tr>
+
+                </tbody>
+
+            }
+        }
+    }
+
+
+
+    @*//POR TEXTO*@
+
+
+    @using (Html.BeginForm("MostrarTodosLosProyectos", "Proyectos", FormMethod.Post))
+    {
+        <div>
+            @Html.Label("Buscar por texto")
+            @Html.TextBox("texto", "", new { @Class = "form-control" })
+            <button type="submit">
+                Buscar
+
+            </button>
+        </div>
+        if (@ViewBag.cTexto != null)
+        {
+
+
+            foreach (Cooperativo unC in @ViewBag.cTexto)
+            {
+                <tbody>
+                    <tr>
+                        <th scope="row">@unC.Fecha</th>
+                        <th scope="row">@unC.Titulo</th>
+                        <th scope="row">@unC.CantidadCuotas</th>
+                        <th scope="row">@unC.MontoPorCuota(unC)</th>
+                        <th scope="row">@unC.MontoSolicitado</th>
+                        <th scope="row">@unC.Resolucion.Estado</th>
+                        @*<th scope="row">@unC.Imagen</th>*@
+                        <td><a href="/Proyecto/ConfirmarEstado/@unC.Id"> Evaluar</a></td>
+
+
+
+
+                    </tr>
+
+                </tbody>
+
+            }
+        }
+        if (@ViewBag.pTexto != null)
+        {
+            foreach (Cooperativo unP in @ViewBag.pTexto)
+            {
+                <tbody>
+                    <tr>
+                        <th scope="row">@unP.Fecha</th>
+                        <th scope="row">@unP.Titulo</th>
+                        <th scope="row">@unP.CantidadCuotas</th>
+                        <th scope="row">@unP.MontoPorCuota(unP)</th>
+                        <th scope="row">@unP.MontoSolicitado</th>
+                        <th scope="row">@unP.Resolucion.Estado</th>
+                        <th scope="row" name ="integrantes" value =@unP.Integrantes>@unP.Integrantes</th>
+
+                        @*<th scope="row">@unP.Imagen</th>*@
+                        <td><a href="/Proyecto/ConfirmarEstado/@unP.Id"> Evaluar</a></td>
+
+                    </tr>
+
+                </tbody>
+
+            }
+        }
+    }
+
+
+
+    @if (@ViewBag.Cop != null 
+        && @ViewBag.TodoPer == null && @ViewBag.TodoCop == null
+        && @ViewBag.pTexto == null && @ViewBag.cTexto
+        && @ViewBag.pEstado == null && @ViewBag.cEstado
+        && @ViewBag.pFecha == null && @ViewBag.cFecha)
+    {
+
+
+
+
+        //TODO EL LISTADO
+
+
 
         foreach (Cooperativo unC in @ViewBag.Cop)
         {
@@ -50,46 +311,29 @@
 
         }
     }
-        @if (ViewBag.Per != null)
+    @if (ViewBag.Per != null)
+    {
+        foreach (Cooperativo unP in @ViewBag.Per)
         {
-            <tr>
-                <th scope="col">Fecha</th>
-                <th scope="col">Titulo</th>
-                <th scope="col">Cantidad de cuotas  </th>
-                <th scope="col">Monto por cuota</th>
-                <th scope="col">Monto solicitado</th>
-                <th scope="col">Estado</th>
-                <th scope="col">Imagen</th>
+            <tbody>
+                <tr>
+                    <th scope="row">@unP.Fecha</th>
+                    <th scope="row">@unP.Titulo</th>
+                    <th scope="row">@unP.CantidadCuotas</th>
+                    <th scope="row">@unP.MontoPorCuota(unP)</th>
+                    <th scope="row">@unP.MontoSolicitado</th>
+                    <th scope="row">@unP.Resolucion.Estado</th>
+                    @*<th scope="row">@unP.Imagen</th>*@
+                    <td><a href="/Proyecto/ConfirmarEstado/@unP.Id"> Evaluar</a></td>
 
+                </tr>
 
+            </tbody>
 
-
-            </tr>
-
-            foreach (Cooperativo unP in @ViewBag.Per)
-            {
-                <tbody>
-                    <tr>
-                        <th scope="row">@unP.Fecha</th>
-                        <th scope="row">@unP.Titulo</th>
-                        <th scope="row">@unP.CantidadCuotas</th>
-                        <th scope="row">@unP.MontoPorCuota(unP)</th>
-                        <th scope="row">@unP.MontoSolicitado</th>
-                        <th scope="row">@unP.Resolucion.Estado</th>
-                        @*<th scope="row">@unP.Imagen</th>*@
-                        <td><a href="/Proyecto/ConfirmarEstado/@unP.Id"> Evaluar</a></td>
-
-
-
-
-                    </tr>
-
-                </tbody>
-
-            }
         }
+    }
 
 
 
 
-    </table>
+</table>
