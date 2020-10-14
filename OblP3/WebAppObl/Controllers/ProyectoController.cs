@@ -29,23 +29,23 @@ namespace WebAppObl.Controllers
             int ci = (int)(Session["ci"]);
             Usuario unU = Usuario.getUsuarioByCi(ci);
             string msg = "";
-            if (unP.Descripcion.Length >= 30 
-                && unP.Titulo.Length >= 1 
-                && unP.MontoSolicitado > 2000 && unP.CantidadCuotas > 0 
-                && unP != null && explicacion.Length >= 10 
+            if (unP.Descripcion.Length >= 30
+                && unP.Titulo.Length >= 1
+                && unP.MontoSolicitado > 2000 && unP.CantidadCuotas > 0
+                && unP != null && explicacion.Length >= 10
                 && Personal.AltaPersonal(unP, unU, explicacion) == "ok") {
 
-                    msg = "Alta exitosa";
-                    return RedirectToAction("Index", new { mensaje = msg });
-                }
-                else
-                {
+                msg = "Alta exitosa";
+                return RedirectToAction("Index", new { mensaje = msg });
+            }
+            else
+            {
                 msg = Personal.AltaPersonal(unP, unU, explicacion);
 
 
-                }
+            }
 
-     
+
             ViewBag.mensaje = msg;
             return View(unP);
 
@@ -63,22 +63,22 @@ namespace WebAppObl.Controllers
             int ci = (int)(Session["ci"]);
             Usuario unU = Usuario.getUsuarioByCi(ci);
             string msg = "";
-            if (unP.Descripcion.Length >= 30 
-                && unP.Titulo.Length >= 1 
-                && unP.MontoSolicitado > 0 && unP.CantidadCuotas > 0 
-                && unP != null && integrantes > 1 
+            if (unP.Descripcion.Length >= 30
+                && unP.Titulo.Length >= 1
+                && unP.MontoSolicitado > 0 && unP.CantidadCuotas > 0
+                && unP != null && integrantes > 1
                 && Cooperativo.AltaCooperativo(unP, unU, integrantes) == "ok")
             {
 
                 msg = "Alta exitosa";
                 return RedirectToAction("MostrarProyecto");
             }
-           else
-                {
-                    msg = Cooperativo.AltaCooperativo(unP, unU, integrantes);
+            else
+            {
+                msg = Cooperativo.AltaCooperativo(unP, unU, integrantes);
 
 
-                }
+            }
 
 
             ViewBag.mensaje = msg;
@@ -91,9 +91,9 @@ namespace WebAppObl.Controllers
             int ci = (int)(Session["ci"]);
             List<Cooperativo> cooperativo = progetPCByCi(ci);
             List<Personal> personal = getPPByCi(ci);
-           foreach(Cooperativo unC in cooperativo)
+            foreach (Cooperativo unC in cooperativo)
             {
-                if(unC.Resolucion.Estado == "Pendiente")
+                if (unC.Resolucion.Estado == "Pendiente")
                 {
                     ViewBag.unCooperativo = unC;
                     Proyecto.MisProyectos.Add(unC);
@@ -117,7 +117,7 @@ namespace WebAppObl.Controllers
                     ViewBag.unPersonal = null;
                 }
             }
-            
+
             return View();
         }
         [HttpGet]
@@ -126,23 +126,38 @@ namespace WebAppObl.Controllers
             int ci = (int)(Session["ci"]);
             List<Cooperativo> cooperativo = progetPCByCi(ci);
             ViewBag.Cop = cooperativo;
-           List<Personal> personal = getPPByCi(ci);
+            List<Personal> personal = getPPByCi(ci);
             ViewBag.Per = personal;
             return View();
         }
         [HttpGet]
-        public ActionResult MostrarTodosLosProyectos()
+        public ActionResult MostrarTodosLosProyectos(string ci, DateTime fecha, string estado, string texto)
         {
+            List<Cooperativo> cTexto = getPCbyTexto(texto);
+            List<Personal> pTexto = getPPbyTexto(texto);
+            ViewBag.cTexto = cTexto;
+            ViewBag.pTexto = pTexto;
+            List<Cooperativo> cEstado = getPCbyEstado(estado);
+            List<Personal> pEstado = getPPbyEstado(estado);
+            ViewBag.cEstado = cEstado;
+            ViewBag.pEstado = pEstado;
+            List<Cooperativo> cFecha = getPCbyFecha(fecha);
+            List<Personal> pFecha = getPPbyFecha(fecha);
+            ViewBag.cFecha = cFecha;
+            ViewBag.pFecha = pFecha;
+            int documento = Int32.Parse(ci);
+            ViewBag.TodoCop = getPCByCi(documento);
+            ViewBag.TodoPer = getPPByCi(documento);
             List<Cooperativo> cooperativos = getPC();
             ViewBag.Cop = cooperativos;
             List<Personal> personales = getPP();
             ViewBag.Per = personales;
             return View();
         }
-        
+
 
         [HttpGet]
-        public ActionResult ConfirmarEstado(int id)
+        public ActionResult ConfirmarEstado(int id, int integrantes)
         {
             if (Session["rol"] == null)
             {
@@ -152,30 +167,41 @@ namespace WebAppObl.Controllers
             {
                 return Redirect("Index");
             }
-            Proyecto proyecto = getProyectooById(id);
+            Proyecto elProyecto;
 
-            return View(proyecto);
+            if (integrantes != null)
+            {
+                elProyecto = getPCById(id);
+
+            }
+            else
+            {
+                elProyecto = getPPById(id);
+
+            }
+
+            return View(elProyecto);
         }
 
 
 
         [HttpPost]
-        public ActionResult ConfirmarEstado(Proyecto unP, int id)
+        public ActionResult ConfirmarEstado(Proyecto unP, int id, int puntaje, DateTime fecha)
         {
+            ViewBag.proyecto = unP;
             string msg = "";
-            if (sistema.ModificarProducto(id, producto) == "ok" && producto.Peso > 0 && producto.Precio > 0)
+            if (unP != null && puntaje >= 1 && puntaje <=10) 
             {
-                msg = "Modificacion exitosa";
-                RedirectToAction("Index", new { mensaje = msg });
+                msg = getPuntaje(id, puntaje, fecha);
             }
             else
             {
-                msg = sistema.ModificarProducto(id, producto);
+                msg = "Datos incorrectos, intente nuevamente";
 
             }
             ViewBag.mensaje = msg;
 
-            return View(producto);
+            return View(unP);
         }
     }
 }

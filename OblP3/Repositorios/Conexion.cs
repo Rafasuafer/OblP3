@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 using System.Configuration;
 using System.Data.SqlClient;
 
+
 namespace Repositorios
 {
-    class Conexion
+    public class Conexion
     {
         private string cadenaConexion =
             ConfigurationManager 

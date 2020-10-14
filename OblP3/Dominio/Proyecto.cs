@@ -26,7 +26,8 @@ namespace Dominio
         private Usuario usuario;
         private int tasa;
         public string NombreArchivoPortada { get; set; }
-        public HttpPostedFileBase Archivo { get; set; }
+        public HttpPostedFileBase Archivo { get; set; }
+
 
         public static List<Proyecto> listaPendiente;
 
@@ -186,7 +187,8 @@ namespace Dominio
                 return false;
         }
     }
-     
+     
+
     }
 
 
