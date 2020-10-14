@@ -1,0 +1,16 @@
+﻿@model Dominio.Proyecto
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<h1>Proyectos</h1><br />
+@if (ViewBag.mensaje != null)
+{
+    <div class="alert alert-success">
+        @ViewBag.mensaje
+    </div>
+}
+<a href="/Proyecto/AltaCooperativo"><strong>Alta Proyecto Cooperativo</strong></a><br />
+<a href="/Proyecto/AltaPersonal"><strong>Alta Proyecto Personal</strong></a><br />
+<a href="/Proyecto/MostrarTodosProyectos"><strong>Todos mis proyectos</strong></a><br />

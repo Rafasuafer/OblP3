@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2>Login</h2>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+</head>
+<body>
+    <div>
+
+        @ViewBag.mensaje
+        <form method="post">
+
+            <label>Usuario</label><br />
+            <input type="number" name="ci" placeholder="Ingresar documento" /><br />
+            <label>Contraseña</label><br />
+            <input type="password" name="password" placeholder="Inresar contraseña" /><br />
+            <button type="submit">Ingresar</button>
+        </form>
+
+
+
+    </div>
+</body>
+</html>

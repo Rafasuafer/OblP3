@@ -1,0 +1,80 @@
+﻿@model Dominio.Proyecto
+
+@{
+    ViewBag.Title = "MostrarProyecto";
+}
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+</head>
+<body>
+    <h2>Mostrar Proyecto</h2>
+    <table id="mostrarProyecto" class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Precio</th>
+                <th scope="col">Peso</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (ViewBag.unC != null)
+            {
+                @foreach (Dominio.Proyecto unP in Dominio.Proyecto.listaPendiente)
+                {
+                    <tr>
+                        <th scope="row">@unP.Titulo</th>
+                        <td>@unP.Descripcion</td>
+                        <td>@unP.Fecha</td>
+                        <td>@unP.MontoSolicitado</td>
+                        <td>@unP.CantidadCuotas</td>
+                        <td>@unP.Tasa</td>
+                        <td>@unP.MontoPorCuota(unP)</td>
+
+                        <td>@unP.CalcularMontoProyecto(unP)</td>
+
+                        }
+
+
+                    </tr>
+
+
+                </tbody>
+            </table>
+            <form action="/Proyecto/MostrarProyecto" method="post">
+                <button type="submit">Confirmar Proyecto</button><br />
+            </form>
+        }
+
+                @if (ViewBag.unP != null)
+                {
+                    @foreach (Dominio.Proyecto unP in Dominio.Proyecto.listaPendiente)
+                    {
+                        <tr>
+                            <th scope="row">@unP.Titulo</th>
+                            <td>@unP.Descripcion</td>
+                            <td>@unP.Fecha</td>
+                            <td>@unP.MontoSolicitado</td>
+                            <td>@unP.CantidadCuotas</td>
+                            <td>@unP.Tasa</td>
+                            <td>@unP.MontoPorCuota(unP)</td>
+
+                            <td>@unP.CalcularMontoProyecto(unP)</td>
+
+                            }
+
+
+                        </tr>
+
+
+                        </tbody>
+                        </table>
+                        <form action="/Proyecto/MostrarProyecto" method="post">
+                            <button type="submit">Confirmar Proyecto</button><br />
+                        </form>
+                    }
